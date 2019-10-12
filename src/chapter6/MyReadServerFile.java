@@ -6,7 +6,11 @@ import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.net.*;
+
+import javax.imageio.ImageIO;
+
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 
 public class MyReadServerFile extends Frame implements ActionListener{
 	private TextField enter;
@@ -18,34 +22,36 @@ public class MyReadServerFile extends Frame implements ActionListener{
 		enter.addActionListener(this);
 		add( enter, BorderLayout.NORTH );
 		contents= new TextArea("", 0, 0, TextArea.SCROLLBARS_VERTICAL_ONLY);
-		//info= new TextArea("", 0, 0, TextArea.SCROLLBARS_VERTICAL_ONLY);
 		add( contents, BorderLayout.CENTER);
 		info= new TextArea("", 0, 0, TextArea.SCROLLBARS_VERTICAL_ONLY);
 		add( info, BorderLayout.SOUTH);
 		addWindowListener(new WinListener());
 		setSize(800, 600);
+		setLocationRelativeTo(null); // 화면 중앙에 배치
 		setVisible(true);
 	}
 	public void actionPerformed( ActionEvent e ) {
-		//String location = e.getActionCommand();
+		String urlstring;
 		// 원격호스트 정보 출력
 		URL u;
-		//String urlstring;
 		InputStream is;
 		BufferedReader br, reader;
+		BufferedImage bi;
 		String line;
+		
+		
 		//StringBuffer buffer = new StringBuffer();
 		//br = new BufferedReader(new InputStreamReader(System.in));
-		String location = e.getActionCommand();
 		try {
+			urlstring = e.getActionCommand();
+			u = new URL(urlstring);
 			//location = br.readLine();
-			u = new URL(location);
+			
 			//is = u.openStream();
 			//br = new BufferedReader(new InputStreamReader(is));
 			
-			contents.setText( "파일을 읽는 중입니다....");
-			//while (())
-			contents.append("\n" + "프로토콜은 " + u.getProtocol() +"\n");
+			
+			contents.append("프로토콜은 " + u.getProtocol() +"\n");
 			contents.append("호스트 이름은 " + u.getHost() +"\n");
 			contents.append("포트 번호는 " + u.getPort() +"\n"); // u.getLocalPort() 는 안된다.
 			contents.append("파일 이름은 " + u.getFile() +"\n");
@@ -55,29 +61,22 @@ public class MyReadServerFile extends Frame implements ActionListener{
 			//urlstring = br.readLine();
 			//u = new URL(urlstring);
 			Object o = u.getContent(); // 어떤 객체인지
-			if (o.getClass().getName().contains(location)) {
-				InputStream is = (InputStream) o;
-				reader = new BufferedReader(new InputStreamReader(is2));
+			if (o.getClass().getName().contains("InputStream")) {
+				info.setText( "파일을 읽는 중입니다....\n");
+				is = (InputStream) o;
+				reader = new BufferedReader(new InputStreamReader(is));
 				while((line=reader.readLine()) != null) {
-					System.out.println(line);
+					info.append(line);
 				}
-			}else if (o.getClass().getName().contains(urlstring)) {
-				java.awt.Image jai = (java.awt.Image) o;
-				reader = new BufferedReader(new InputStreamReader(jai));
-				while((line=reader.readLine()) != null) {
-					System.out.println(line);
+			}else if (o.getClass().getName().contains("java.awt.Image")) {
+				info.setText("이미지 파일입니다");
+				//bi = ImageIO.read(u);
+				//InputStream jai = (InputStream) o;
+				//reader = new BufferedReader(new InputStreamReader(jai));
+				//while((line=reader.readLine()) != null) {
+				//	System.out.println(line);
 				}
-			}else {
-				
-			}
-			/*System.out.println("프로토콜은 " + u.getProtocol());
-			System.out.println("호스트 이름은 " + u.getHost() );
-			System.out.println("포트 번호는 " + u.getPort());
-			System.out.println("파일 이름은 " + u.getFile());
-			System.out.println("경로는 " + u.getPath());
-			System.out.println("앵커정보는 " + u.getRef());
-			System.out.println("해시코드는 " + u.hashCode());*/
-		}catch (IOException ioe) {
+			}catch (IOException ioe) {
 			System.out.println(ioe.toString());
 		}
 		// URL이 가리키는 객체에 따라 내용이나 유형 출력
