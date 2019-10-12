@@ -1,6 +1,6 @@
 /*
  * author: eliotjang
- * last_modified_at: 2019-10-13T02:35+09:00
+ * last_modified_at: 2019-10-13T02:46+09:00
  */
 
 package chapter5;
@@ -11,7 +11,7 @@ public class GetIPAddress {
 
 	public static void main(String[] args) { 
 		if(args.length != 1) {
-			System.err.println("usage: put host name in Program Arguments!");
+			System.err.println("usage: put hostName in Program Arguments!");
 			System.exit(1);
 		}
 		try {
