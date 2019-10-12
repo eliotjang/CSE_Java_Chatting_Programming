@@ -1,12 +1,12 @@
-// coded by eliotjang
-// 2019.10.10
+/* coded by eliotjang
+ * last_modified_at: 2019.10.12
+ */
 package chapter6;
 
 import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.net.*;
-import java.awt.Image;
 
 
 public class MyReadServerFile extends Frame implements ActionListener{
@@ -15,7 +15,7 @@ public class MyReadServerFile extends Frame implements ActionListener{
 	public MyReadServerFile() {
 		super("호스트 파일 읽기");
 		setLayout( new BorderLayout() );
-		enter = new TextField( "URL을 입력하세요!" );
+		enter = new TextField( "URL을 입력하세요.(키보드 입력 시 사라집니다)" );
 		enter.addActionListener(this);
 		// 텍스트필드에서 URL을 키보드로 받아들일 때, 기존에 있던 텍스트필드 내용 제거 
 		enter.addKeyListener(new KeyListener() {
@@ -44,30 +44,41 @@ public class MyReadServerFile extends Frame implements ActionListener{
 			u = new URL(urlstring);
 			// 원격호스트 정보 출력
 			contents.setText("§원격호스트 정보§\n\n");
-			contents.append("프로토콜은 " + u.getProtocol() +"\n");
-			contents.append("호스트 이름은 " + u.getHost() +"\n");
-			contents.append("포트 번호는 " + u.getPort() +"\n"); // u.getLocalPort() 는 안된다.
-			contents.append("파일 이름은 " + u.getFile() +"\n");
-			contents.append("경로는 " + u.getPath() +"\n");
-			contents.append("앵커정보는 " + u.getRef() +"\n");
-			contents.append("해시코드는 " + u.hashCode() +"\n");
+			contents.append("프로토콜: " + u.getProtocol() +"\n");
+			contents.append("호스트 이름: " + u.getHost() +"\n");
+			contents.append("포트 번호: " + u.getPort() +"\n"); // u.getLocalPort() 는 안된다.
+			contents.append("파일 이름: " + u.getFile() +"\n");
+			contents.append("경로: " + u.getPath() +"\n");
+			contents.append("앵커정보: " + u.getRef() +"\n");
+			contents.append("해시코드: " + u.hashCode() +"\n");
 	
-			Object o = u.getContent(); // 어떤 객체인지
+			Object o = u.getContent(); // 어떤 객체인지 확인
+			HttpURLConnection conn = (HttpURLConnection) u.openConnection();
 			
 			// URL이 가리키는 객체에 따라 내용이나 유형 출력
-			info.setText( "파일을 읽는 중...\n\n");
-			info.append("\n\n§반환된 객체§\n" + o.getClass().getName());
+			info.setText( "파일을 읽는 중...\n\n\n");
+			
+			/* 어떤 유형의 내용이 나오는지 미리 확인 후, 코드 작성.
+			 * info.append(conn.getContentType());
+			 */
 			if (o.getClass().getName().contains("URLImageSource")) {
-				info.append("§이미지 파일§\n");
-				info.append("\n\n§반환된 객체§\n" + o.getClass().getName());
+			//매개인자에 image를 넣어도 가능. Because "image" includes "URLImageSource"
+				info.append("§콘텐츠 유형§\n");
+				info.append("image.URLImageSource\n\n");
+				info.append("§반환 객체§\n");
+				info.append(o.getClass().getName());
 			}
-			else if(o.getClass().getName().contains("Video")) {
-				info.append("§비디오 파일§\n");
-				info.append("\n\n§반환된 객체§\n" + o.getClass().getName());
+			else if(conn.getContentType().contains("audio")) {
+				info.append("§콘텐츠 유형§\n");
+				info.append(conn.getContentType() + "\n\n");
+				info.append("§반환 객체§\n");
+				info.append(conn.toString());
 			}
-			else if(o.getClass().getName().contains("Audio")) {
-				info.append("§오디오 파일§\n");
-				info.append("\n\n§반환된 객체§\n" + o.getClass().getName());
+			else if(conn.getContentType().contains("video")) {
+				info.append("§콘텐츠 유형§\n");
+				info.append(conn.getContentType() + "\n\n");
+				info.append("§반환 객체§\n");
+				info.append(conn.toString());
 			}
 			else if(o.getClass().getName().contains("InputStream")) {
 				info.append("§텍스트 파일§\n");
@@ -75,7 +86,7 @@ public class MyReadServerFile extends Frame implements ActionListener{
 				reader = new BufferedReader(new InputStreamReader(is));
 				while((line=reader.readLine()) != null)
 					info.append(line);
-				info.append("\n\n§반환된 객체§\n" + o.getClass().getName());
+				info.append("\n\n§반환 객체§\n" + o.getClass().getName());
 			}
 			else { System.err.println(o.toString() + " 를 읽지 못하였음"); }
 		}catch(IOException ioe) {
