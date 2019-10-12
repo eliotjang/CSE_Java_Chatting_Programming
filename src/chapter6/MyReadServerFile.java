@@ -56,17 +56,18 @@ public class MyReadServerFile extends Frame implements ActionListener{
 			
 			// URL이 가리키는 객체에 따라 내용이나 유형 출력
 			info.setText( "파일을 읽는 중...\n\n");
-			if (o.getClass().getName().contains("Image")) {
+			info.append("\n\n§반환된 객체§\n" + o.getClass().getName());
+			if (o.getClass().getName().contains("URLImageSource")) {
 				info.append("§이미지 파일§\n");
-				System.out.println("반환된 객체는 " + o.getClass().getName());
+				info.append("\n\n§반환된 객체§\n" + o.getClass().getName());
 			}
 			else if(o.getClass().getName().contains("Video")) {
 				info.append("§비디오 파일§\n");
-				System.out.println("반환된 객체는 " + o.getClass().getName());
+				info.append("\n\n§반환된 객체§\n" + o.getClass().getName());
 			}
 			else if(o.getClass().getName().contains("Audio")) {
 				info.append("§오디오 파일§\n");
-				System.out.println("반환된 객체는 " + o.getClass().getName());
+				info.append("\n\n§반환된 객체§\n" + o.getClass().getName());
 			}
 			else if(o.getClass().getName().contains("InputStream")) {
 				info.append("§텍스트 파일§\n");
@@ -74,7 +75,7 @@ public class MyReadServerFile extends Frame implements ActionListener{
 				reader = new BufferedReader(new InputStreamReader(is));
 				while((line=reader.readLine()) != null)
 					info.append(line);
-				System.out.println("반환된 객체는 " + o.getClass().getName());
+				info.append("\n\n§반환된 객체§\n" + o.getClass().getName());
 			}
 			else { System.err.println(o.toString() + " 를 읽지 못하였음"); }
 		}catch(IOException ioe) {
