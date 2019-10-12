@@ -6,10 +6,7 @@ package chapter5;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-/*
- * same as following code
- * import java.net.*;
- */
+//same as following code: import java.net.*;
 
 public class GetManyIPAddress {
 
