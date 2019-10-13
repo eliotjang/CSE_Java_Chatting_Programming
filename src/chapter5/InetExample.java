@@ -51,12 +51,16 @@ public class InetExample {
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		}
-		//eliotjang
+		
 	}
 	
 	static char ipClass(byte[] ip) {
 		int highByte = 0xff & ip[0];
 		return(highByte < 128 ? 'A' : highByte < 192 ? 'B' : highByte < 224 ? 'C' : highByte < 240 ? 'D' : 'E');
+		/*
+		 * NetWorkAddress of highByte
+		 * A: 0~126, B: 128~191, C: 192~223, D: 224~239, E: 240~255
+		 */
 	}
 
 }
