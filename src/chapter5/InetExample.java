@@ -51,7 +51,7 @@ public class InetExample {
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		}
-		
+		//eliotjang
 	}
 	
 	static char ipClass(byte[] ip) {
