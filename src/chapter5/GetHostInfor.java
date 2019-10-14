@@ -20,9 +20,9 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 public class GetHostInfor extends Frame implements ActionListener {
-	TextField hostname;
+	TextField hostname, viewclass;
 	Button getinfor;
-	TextArea display, classview;
+	TextArea display;
 
 	public static void main(String[] args) {
 		GetHostInfor host = new GetHostInfor("InetAddress 클래스");
@@ -53,14 +53,14 @@ public class GetHostInfor extends Frame implements ActionListener {
 		
 		Panel classpanel = new Panel();
 		classpanel.setLayout(new BorderLayout());
-		classview = new TextArea("", 24, 40);
-		classview.setEditable(false);
+		viewclass = new TextField("", 30);
+		viewclass.setEditable(false);
 		classpanel.add("North", new Label("클래스 유형"));
-		classpanel.add("Center", classview);
+		classpanel.add("Center", viewclass);
 		add("South", classpanel);
 		
 		setLocationRelativeTo(null); // GUI를 모니터 중앙에 배치
-		setSize(400, 600);
+		setSize(400, 400);
 	}
 	
 	public void actionPerformed(ActionEvent e) {
@@ -70,10 +70,9 @@ public class GetHostInfor extends Frame implements ActionListener {
 			InetAddress maininet = InetAddress.getByName(name);
 			for ( int i=0 ; i < inet.length ; i++) {
 				display.append(inet[i].toString()+"\n");
-			}
-			classview.setText("");
+			}		
 			char result = ipClass(maininet.getAddress());
-			classview.append(Character.toString(result));
+			viewclass.setText(Character.toString(result));
 		} catch(UnknownHostException ue) {
 			String ip = name+": 해당 호스트가 없습니다.\n";
 			display.append(ip);
