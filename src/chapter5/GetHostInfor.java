@@ -52,11 +52,10 @@ public class GetHostInfor extends Frame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		String name = hostname.getText();
 		try {
-			InetAddress inet = InetAddress.getByName(name);
-			String ip = inet.getHostName()+"\n";
-			display.append(ip);
-			ip = inet.getHostAddress()+"\n";
-			display.append(ip);
+			InetAddress[] inet = InetAddress.getAllByName(name);
+			for ( int i=0 ; i < inet.length ; i++) {
+				display.append(inet[i].toString()+"\n");
+			}
 		} catch(UnknownHostException ue) {
 			String ip = name+": 해당 호스트가 없습니다.\n";
 			display.append(ip);
