@@ -7,15 +7,15 @@ public class MyEchoServer {
 
 	public static void main(String[] args) {
 		ServerSocket theServer;
-		/*Socket theSocket = null;
-		InputStream is;
-		BufferedReader reader;
-		OutputStream os;
-		BufferedWriter writer;
-		String theLine;*/
 		try {
 			theServer = new ServerSocket(7);
 			//theServer.setReuseAddress(true);
+			theServer.setReuseAddress(true);
+			System.out.println(theServer.toString());
+			System.out.println("current Server buffer size: " + theServer.getReceiveBufferSize());
+			theServer.setReceiveBufferSize(100);
+			System.out.println("modified Server buffer size: " + theServer.getReceiveBufferSize());
+			System.out.println("reuse enable: "+theServer.getReuseAddress());
 			
 			while(true) {
 				Socket connection = null;
@@ -46,26 +46,18 @@ class Echo extends Thread{
 		this.connection = connection;
 	    InetAddress Address = InetAddress.getLocalHost();
 	    SocketAddress addr = new InetSocketAddress(Address,8011);
-	    System.out.println("SO_REUSEADDR is enabled: " + connection.getReuseAddress());
-	    connection.setReuseAddress(true);
-	    System.out.println("SO_REUSEADDR is enabled: " + connection.getReuseAddress());
-	   // connection.bind(addr);
+	    //System.out.println("SO_REUSEADDR is enabled: " + connection.getReuseAddress());
+	    //connection.setReuseAddress(true);
+	    //System.out.println("SO_REUSEADDR is enabled: " + connection.getReuseAddress());
 		} catch (UnknownHostException uhe) {
 			uhe.printStackTrace();
-		} catch (SocketException se) {
-			se.printStackTrace();
-		} catch (IOException ioe) {
-			ioe.printStackTrace();
-		}
+		}// catch (SocketException se) {
+		//	se.printStackTrace();
+		//} 
 	}
 	
 	public void run() {
-		/*InputStream is;
-		BufferedReader reader;
-		OutputStream os;
-		BufferedWriter writer;
-		String theLine;*/
-		
+	
 		try {
 			is = connection.getInputStream();
 			reader = new BufferedReader(new InputStreamReader(is));
@@ -73,7 +65,8 @@ class Echo extends Thread{
 			writer = new BufferedWriter(new OutputStreamWriter(os));
 			
 			while((theLine = reader.readLine()) != null) {
-				System.out.println(theLine);
+				//print to.String() method
+				System.out.println(theLine.toString());
 				writer.write(theLine + '\r' + '\n');
 				writer.flush();
 			} 

@@ -24,13 +24,25 @@ public class MyEchoClient1 {
          userInput = new BufferedReader(new InputStreamReader(System.in));
          os = theSocket.getOutputStream();
          writer = new BufferedWriter(new OutputStreamWriter(os));
-         System.out.println("전송할 문장을 입력하십시오.");
+
+         System.out.println(theSocket.toString());
+         System.out.println("current client buffer size: "+theSocket.getSendBufferSize());
+         System.out.println(theSocket.getKeepAlive());
+         System.out.println(theSocket.getTcpNoDelay());
+         theSocket.setSendBufferSize(100);
+         theSocket.setKeepAlive(true);
+         theSocket.setTcpNoDelay(true);
+         System.out.println("modified client buffer size: "+theSocket.getSendBufferSize());
+         System.out.println(theSocket.getKeepAlive());
+         System.out.println(theSocket.getTcpNoDelay());
+         
          while(true) {
             theLine =userInput.readLine();
             if(theLine.equals("quit")) break;
             writer.write(theLine + '\r'+'\n');
             writer.flush();
-            System.out.println(reader.readLine());
+            //print to.String() method
+            System.out.println(reader.readLine().toString());
          }
       }catch(UnknownHostException e) {
          System.err.println(args[0]+"호스트를 찾을 수 없습니다.");
