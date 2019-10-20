@@ -3,7 +3,7 @@ package chapter8;
 import java.io.*;
 import java.net.*;
 
-public class EchoClient {
+public class MyEchoClient2 {
    public static void main(String args[]) {
       Socket theSocket =null;
       String host;
