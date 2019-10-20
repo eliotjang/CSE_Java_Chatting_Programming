@@ -3,7 +3,7 @@ package chapter8;
 import java.io.*;
 import java.net.*;
 
-public class DayTimeClient {
+public class MyDayTimeClient {
 	
 	public static void main(String[] args) {
 		Socket theSocket;

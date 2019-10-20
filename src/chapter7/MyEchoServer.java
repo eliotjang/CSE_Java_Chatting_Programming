@@ -3,7 +3,7 @@ package chapter7;
 import java.io.*;
 import java.net.*;
 
-public class EchoServer {
+public class MyEchoServer {
 	
 	class Echo extends Thread{
 		
@@ -15,6 +15,7 @@ public class EchoServer {
 			String theLine;
 			
 			try {
+				is = connection.getInputStream();
 				reader = new BufferedReader(new InputStreamReader(is));
 				os = connection.getOutputStream();
 				writer = new BufferedWriter(new OutputStreamWriter(os));
@@ -55,7 +56,7 @@ public class EchoServer {
 				Echo client = null;
 				try {
 					connection = theServer.accept();
-					Echo client = new Echo(connection);
+					client = new Echo(connection);
 					client.start();
 				} catch (Exception e) {
 					System.out.println(e.toString());
