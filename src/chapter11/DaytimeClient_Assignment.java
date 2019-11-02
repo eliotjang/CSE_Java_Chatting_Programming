@@ -1,9 +1,13 @@
+/*
+ * Author: Eliot Jang
+ * last_modified_at: 2019-11-02T14:30:00+09:00
+ */
 package chapter11;
 
 import java.io.*;
 import java.net.*;
 
-public class Ex1_Client{
+public class DaytimeClient_Assignment{
    
 public final static int daytimeport=5099;
    public static void main(String[] args)throws SocketException {

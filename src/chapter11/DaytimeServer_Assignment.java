@@ -1,10 +1,14 @@
+/*
+ * Author: Eliot Jang
+ * last_modified_at: 2019-11-02T14:30:00+09:00
+ */
 package chapter11;
 
 import java.io.*;
 import java.net.*;
 import java.util.Date;
 
-public class Ex1_Server {
+public class DaytimeServer_Assignment {
    public final static int daytimeport=5099;
    public final static int BUFFER_SIZE=9000;
    public static void main(String args[]) {
