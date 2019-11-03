@@ -21,7 +21,6 @@ public class One2OneServer_Assignment extends Frame implements ActionListener{
 		display = new TextArea("",0,0,TextArea.SCROLLBARS_VERTICAL_ONLY);
 		display.setEditable(false);
 		add(display,BorderLayout.CENTER);
-		
 		chats = new Label("chatting");
 		text = new TextField(30);
 		text.addActionListener(this);
@@ -32,7 +31,7 @@ public class One2OneServer_Assignment extends Frame implements ActionListener{
 		setSize(500,500);
 		setVisible(true);
 		try {
-			socket = new DatagramSocket(5000);
+			socket = new DatagramSocket(5009);
 		}catch(SocketException se) {
 			se.printStackTrace();
 			System.exit(1);

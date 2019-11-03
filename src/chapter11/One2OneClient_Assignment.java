@@ -25,7 +25,7 @@ public class One2OneClient_Assignment extends Frame implements ActionListener{
 		enter = new TextField(30);
 		enter.addActionListener(this);
 		pnl.add(chats,BorderLayout.WEST);
-		pnl.add(enter, BorderLayout.EAST);
+		pnl.add(enter,BorderLayout.EAST);
 		add(pnl,BorderLayout.SOUTH);
 		addWindowListener(new WinListener());
 		setSize(500,500);
@@ -59,7 +59,7 @@ public class One2OneClient_Assignment extends Frame implements ActionListener{
 			display.append("\nsend message: "+e.getActionCommand()+"\n");
 			String s = e.getActionCommand();
 			byte[] data = s.getBytes();
-			sendPacket = new DatagramPacket(data,data.length,InetAddress.getLocalHost(),5000);
+			sendPacket = new DatagramPacket(data,data.length,InetAddress.getLocalHost(),5009);
 			socket.send(sendPacket);
 			display.append("packet send complete\n");
 		}catch(IOException exception) {
