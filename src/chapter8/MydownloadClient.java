@@ -51,6 +51,7 @@ public class MydownloadClient{
                 System.out.println(filename.toString());
                 System.out.println("저장완료");
             }
+            
         }catch(Exception e){
         	System.out.println(e.toString());
         }

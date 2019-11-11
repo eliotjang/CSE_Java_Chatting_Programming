@@ -42,6 +42,7 @@ public class MydownloadServer2 {
             System.out.println("서버에서 클라이언트로 송신 완료");
             out.flush();
             out.close();
+            soc.close();
         }
     }
  

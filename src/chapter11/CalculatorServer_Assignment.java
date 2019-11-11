@@ -54,6 +54,6 @@ public class CalculatorServer_Assignment {
 
 			sendPacket = new DatagramPacket(buf, buf.length, InetAddress.getLocalHost(), port); 
 			socket.send(sendPacket); 
-		} 
+		}
 	} 
 } 

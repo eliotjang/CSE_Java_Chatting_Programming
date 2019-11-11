@@ -47,7 +47,7 @@ public class Assignment_CompareFile {
 				System.out.println(filename1 + " length = " + filename1.length());
 				System.out.println(filename2 + " length = " + filename2.length());
 			}
-			
+			br2.close();
 		}catch(FileNotFoundException fnfe) { // FileNotFoundException은 IOException에 속하지만 작성하는 것이 좋은 예외처리이다.
 			System.err.println(fnfe.toString());
 		}catch(IOException ioe) {
