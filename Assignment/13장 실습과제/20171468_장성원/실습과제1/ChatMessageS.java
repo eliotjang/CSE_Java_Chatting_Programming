@@ -1,4 +1,4 @@
-/*package chapter9;
+package chapter13;
 
 import java.awt.*;
 import java.awt.List;
@@ -9,20 +9,26 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.net.ServerSocket;
-import java.net.Socket;
+import java.net.*;
 import java.util.*;
 
 public class ChatMessageS extends Frame{
+	InetAddress group;
+	int port;
+	Label mult;
 	TextArea display;
 	Label info;
 	ArrayList<ServerThread> list;
 	Hashtable hash;
 	public ServerThread SThread;
 	
-	public ChatMessageS() {
+	public ChatMessageS(InetAddress group, int port) {
 		super("server");
+		this.group = group;
+		this.port = port;
+		mult = new Label("멀티캐스트 채팅 그룹 주소 : " + group.getHostAddress() + " , " + port + "]");
 		info = new Label();
+		add(mult, BorderLayout.NORTH);
 		add(info, BorderLayout.CENTER);
 		display = new TextArea("", 0,0,TextArea.SCROLLBARS_VERTICAL_ONLY);
 		display.setEditable(false);
@@ -31,6 +37,7 @@ public class ChatMessageS extends Frame{
 		setSize(300, 250);
 		setVisible(true);
 	}
+	
 	
 	public void runServer() {
 		ServerSocket server;
@@ -54,9 +61,11 @@ public class ChatMessageS extends Frame{
 			ioe.printStackTrace();
 		}
 	}
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException{
 		// TODO Auto-generated method stub
-		ChatMessageS s = new ChatMessageS();
+		InetAddress group = InetAddress.getByName("224.0.0.0");
+		int port = 5000;
+		ChatMessageS s = new ChatMessageS(group, port);
 		s.runServer();
 	}
 	class WinListener extends WindowAdapter{
@@ -214,4 +223,4 @@ class ServerThread extends Thread{
 			ea.printStackTrace();
 		}
 	}
-}*/
+}

@@ -1,4 +1,4 @@
-/*package chapter9;
+package chapter13;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -248,4 +248,3 @@ public class ChatMessageC extends Frame implements ActionListener, KeyListener{
 	}
 
 }
-*/
