@@ -1,13 +1,13 @@
-package chapter13;
-// step3
-// 아이디와 대화말 메시지를 전송함
+/*package chapter13;
+
+
 import java.io.*;
 import java.net.*;
 import java.util.StringTokenizer;
 import java.awt.*;
 import java.awt.event.*;
 
-public class Multicast_Receiver extends Frame implements ActionListener, KeyListener {
+public class Multicast_Client extends Frame implements ActionListener, KeyListener {
    Button lb;
    TextArea display;
    TextField wtext, ltext;
@@ -28,7 +28,7 @@ public class Multicast_Receiver extends Frame implements ActionListener, KeyList
    private static final int REQ_SENDWORDS = 1021;
    private static final int LOGOUT =2001;
    
-   public Multicast_Receiver() {
+   public Multicast_Client() {
       super("클라이언트");
 
       mlbl = new Label("채팅 상태를 보여줍니다.");
@@ -94,10 +94,8 @@ public class Multicast_Receiver extends Frame implements ActionListener, KeyList
        try {
          ds = new DatagramSocket();
       } catch (SocketException e1) {
-         // TODO Auto-generated catch block
          e1.printStackTrace();   
       } catch (IOException e) {
-         // TODO Auto-generated catch block
          e.printStackTrace();
       }
 
@@ -105,8 +103,7 @@ public class Multicast_Receiver extends Frame implements ActionListener, KeyList
          mlbl.setText("접속 완료 사용할 아이디를 입력하세요.");
          while(true) {
             try {
-              if(ID.equals("") ==false && message!=null) {//빈칸이 아니면
-                 //ms_incoming = new DatagramPacket(buffer,buffer.length);
+              if(ID.equals("") ==false && message!=null) {
                  ms.receive(ms_incoming);
                 serverdata = new String(ms_incoming.getData(),0,ms_incoming.getLength());
                 System.out.println(serverdata);
@@ -181,7 +178,7 @@ public class Multicast_Receiver extends Frame implements ActionListener, KeyList
    }
    
    public static void main(String args[]) {
-      Multicast_Receiver c = new Multicast_Receiver();
+      Multicast_Client c = new Multicast_Client();
       c.runClient();
    }
       
@@ -245,4 +242,4 @@ public class Multicast_Receiver extends Frame implements ActionListener, KeyList
 
    public void keyTyped(KeyEvent ke) {
    }
-}
+}*/

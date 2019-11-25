@@ -1,4 +1,4 @@
-package chapter13;
+/*package chapter13;
 
 import java.net.*;
 import java.io.*;
@@ -191,4 +191,4 @@ public class MulticastChat implements Runnable, WindowListener, ActionListener {
 		MulticastChat chat = new MulticastChat(group, port);
 		chat.start();
 	}
-}
+}*/

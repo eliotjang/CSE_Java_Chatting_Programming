@@ -1,6 +1,6 @@
-package chapter13;
-// STEP 3
-// 로그온 메시지와 대화말 메시지를 전송함
+/*package chapter13;
+
+
 import java.io.*;
 import java.net.*;
 import java.util.*;
@@ -37,7 +37,6 @@ public class Multicast_Server extends Frame {
        SThread.start();
        
    } catch (IOException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
    }
    }
@@ -47,7 +46,6 @@ public class Multicast_Server extends Frame {
       try {
       s.runServer();
    } catch (SocketException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
    }
    }
@@ -139,4 +137,4 @@ class ServerThread extends Thread {
       }    
      // sock.close();
    }
-}
+}*/
