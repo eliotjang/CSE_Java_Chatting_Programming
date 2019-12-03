@@ -6,15 +6,17 @@ import java.awt.event.*;
 public class ChatClient extends Frame implements ActionListener
 {
    
-   private TextField cc_tfLogon; // 로그온 입력 텍스트 필드
    private Button cc_btLogon; // 로그온 실행 버튼
    private Button cc_btEnter; // 대화방 개설 및 입장 버튼
    private Button cc_btLogout; // 로그아웃 버튼
-
+   private Button cc_btCreateroom;//방 생성
+   protected TextField cc_tfLogon;  // 로그온 입력 텍스트 필드
    public TextField cc_tfStatus; // 로그온 개설 안내
    public TextField cc_tfDate; // 개설시각
    public List cc_lstMember; // 대화방 참가자
-
+   public List cc_lstRoom; //방
+   
+   
    public static ClientThread cc_thread;
    public static ChatClient client;
    public String msg_logon="";
@@ -40,7 +42,7 @@ public class ChatClient extends Frame implements ActionListener
       cc_btLogout = new Button("로그아웃");
       cc_btLogout.addActionListener(this);
       bt_panel.add(cc_btLogout);
-      add("South", bt_panel);
+      add("Center", bt_panel);
 
       // 4개의 Panel 객체를 사용하여 대화방 정보를 출력한다.
       Panel roompanel = new Panel(); // 3개의 패널을 담을 패널객체
@@ -55,8 +57,8 @@ public class ChatClient extends Frame implements ActionListener
       
       Panel centerpanel = new Panel();
       centerpanel.setLayout(new FlowLayout());
-      centerpanel.add(new Label("로그온 시각 : "));
-      cc_tfDate = new TextField("사용자 로그인 시각이 표시됩니다",31);
+      centerpanel.add(new Label("개설 시각 : "));
+      cc_tfDate = new TextField("대화방의 개설 시각",31);
       cc_tfDate.setEditable(false);
       centerpanel.add(cc_tfDate);
 
@@ -65,9 +67,15 @@ public class ChatClient extends Frame implements ActionListener
       southpanel.add(new Label("로그온 사용자"));
       cc_lstMember = new List(10);
       southpanel.add(cc_lstMember);
-
+      southpanel.add(new Label("개설된 방"));
+      cc_lstRoom = new List(10);
+      southpanel.add(cc_lstRoom);
+      
+      
       roompanel.add("North", northpanel);
       roompanel.add("Center", centerpanel);
+      
+      
       roompanel.add("South", southpanel);
       add("North", roompanel);
 
@@ -79,7 +87,7 @@ public class ChatClient extends Frame implements ActionListener
    class WinListener extends WindowAdapter
    {
       public void windowClosing(WindowEvent we){
-
+    	 cc_thread.requestLogout();
          System.exit(0); // 나중에 로그아웃루틴으로 변경
       }
    }
@@ -91,18 +99,14 @@ public class ChatClient extends Frame implements ActionListener
 
          // 로그온 처리 루틴
          msg_logon = cc_tfLogon.getText(); // 로그온 ID를 읽는다.
-         
          if(!msg_logon.equals("")){
-        	 cc_tfLogon.setEditable(false);
-        	 cc_thread.requestLogon(msg_logon); // ClientThread의 메소드를 호출
+            cc_thread.requestLogon(msg_logon); // ClientThread의 메소드를 호출
          }else{
-        	 MessageBox msgBox = new  MessageBox(this, "로그온", "로그온 id를 입력하세요.");
-        	 msgBox.show();
+            MessageBox msgBox = new  MessageBox(this, "로그온", "로그온 id를 입력하세요.");
+            msgBox.show();
          }
       }else if(b.getLabel().equals("대화방입장")){
-    	  //if ()
-    	  //MessageBox msgBox2 = new MessageBox(this, "로그온", "이미 다른 사용자가 있습니다.");
-         // msgBox2.show();
+
          // 대화방 개설 및 입장 처리 루틴
          msg_logon = cc_tfLogon.getText(); // 로그온 ID를 읽는다.
          if(!msg_logon.equals("")){
@@ -113,15 +117,27 @@ public class ChatClient extends Frame implements ActionListener
          }
 
       }else if(b.getLabel().equals("로그아웃")){
-
+    	  if(!cc_tfLogon.isEditable()) {
+    		  cc_thread.requestLogout();
+    		  cc_tfLogon.setText("");
+    	  }else {
+    		  MessageBox msgBox = new MessageBox(this, "로그온", "로그온을 먼저 하십시오.");
+    		  msgBox.show();
+    	  }
       // 로그아웃 처리 루틴
-
+      }else if(b.getLabel().equals("대화방개설")) {
+    	  if(!cc_tfLogon.isEditable()) {
+    		  cc_thread.requestCreateroom();
+    	  }else {
+    		  MessageBox msgBox = new MessageBox(this, "로그온", "로그온을 먼저 하십시오.");
+    		  msgBox.show();
+    	  }
       }
    }
 
    public static void main(String args[]){
       client = new ChatClient("대화방 개설 및 입장");
-      client.setSize(380, 400);
+      client.setSize(350, 400);
       client.show();
 
       // 소켓을 생성하고 서버와 통신할 스레드를 호출한다.
@@ -140,3 +156,4 @@ public class ChatClient extends Frame implements ActionListener
       }
    }
 }
+
