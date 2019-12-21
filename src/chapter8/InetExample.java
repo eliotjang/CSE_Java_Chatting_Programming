@@ -2,7 +2,7 @@
  * author: eliotjang
  * last_modified_at: 2019-10-13T21:34:00+09:00
  */
-package chapter5;
+package chapter8;
 
 import java.io.BufferedReader;
 import java.io.IOException;
