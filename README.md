@@ -22,9 +22,9 @@
 - URLConnection 클래스를 사용해 파일의 헤더를 읽어오는 방법
 - 멀티캐스팅 전송 방식
 
-## 자바 채팅 프로그램을 작성하는 기본적인 개념
+## 기본적인 개념
 
-- Socket 및 ServerSocket 클래스와 같은 몇 개의 클래스를 이용하여 작성 가능
+- 자바 채팅 프로그램은 Socket 및 ServerSocket 클래스와 같은 몇 개의 클래스를 이용하여 작성 가능
 
 - - -
 
@@ -50,7 +50,7 @@
 - use URLConnection calss to read file header
 - description multicasting translation system
 
-## Basic grammer for writing Java Chatting Program
+## Basic grammer
 
-- Use several class like Socket & ServerSocket class.
+- Use several class like Socket & ServerSocket class to make Java Chatting Program
 
