@@ -22,5 +22,7 @@
     - InetAddress와 URL 클래스 사용
 
 ### 주요 소스코드 구현
-- [ChatClient.Java](src/chattingprogramming/ChatClient.java)
-- [ChatServer.Java](src/chattingprogramming/ChatServer.java)
+- [ChatClient.java](src/chattingprogramming/ChatClient.java)
+- [ChatServer.java](src/chattingprogramming/ChatServer.java)
+- [ClientThread.java](src/chattingprogramming/ClientThread.java)
+- [ServerThread.java](src/chattingprogramming/ServerThread.java)
